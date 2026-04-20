@@ -3,5 +3,6 @@ void setup() {
 }
 
 void draw() {
-  board();
+  makeBoard();
+  makePcMove();
 }
