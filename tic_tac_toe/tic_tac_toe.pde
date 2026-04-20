@@ -3,6 +3,5 @@ void setup() {
 }
 
 void draw() {
-  // centerLines();
   board();
 }
