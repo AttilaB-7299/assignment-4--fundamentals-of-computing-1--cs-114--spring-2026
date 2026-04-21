@@ -1,20 +1,19 @@
 void makeBoard(){
-  //tall lines
-  line(175, 450, 175, 50);
-  line(315, 450, 315, 50);
+  stroke(0);
+  strokeWeight(2);
 
-  //long lines
-  line(50, 175, 450, 175);
-  line(50, 315, 450, 315);
+  line(VERT_LINE_ONE_X, 0, VERT_LINE_ONE_X, height);
+  line(VERT_LINE_TWO_X, 0, VERT_LINE_TWO_X, height);
+  line(0, HORI_LINE_ONE_Y, width, HORI_LINE_ONE_Y);
+  line(0, HORI_LINE_TWO_Y, width, HORI_LINE_TWO_Y);
 }
-// void centerLines(){
-//   line(250, 500, 250, 0);
-//   line(0, 250, 500, 250);
-// }
-void makePcMove(){
-  line(200, 300, 300, 200);
-  line(300, 300, 200, 200);
-}
-void makePlayerMove(){
+void drawX(int cell){
+  stroke(0);
+  strokeWeight(2);
 
+  float x = getCellX(cell);
+  float y = getCellY(cell);
+
+  line(x, y, x + LINE_HEIGHT_NORMAL, y + LINE_HEIGHT_NORMAL);
+  line(x + LINE_HEIGHT_NORMAL, y, x, y + LINE_HEIGHT_NORMAL);
 }
