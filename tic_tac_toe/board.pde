@@ -115,13 +115,11 @@ boolean checkColumn(){
   if (playerCells[0] && playerCells[3] && playerCells[6] ||
       playerCells[1] && playerCells[4] && playerCells[7] ||
       playerCells[2] && playerCells[5] && playerCells[8]){
-
     playerWin = true;
   }
   if (pcCells[0] && pcCells[3] && pcCells[6] ||
       pcCells[1] && pcCells[4] && pcCells[7] ||
       pcCells[2] && pcCells[5] && pcCells[8]){
-
     pcWin = true;
   }
 
@@ -488,7 +486,6 @@ int getRightCell(int lastCell){
       return lastCell + 1;
   }
   else {
-    println("No such cell exists");
     return -1;
   }
 }
@@ -497,7 +494,6 @@ if (lastCell != 0 && lastCell != 3 && lastCell != 6 && !cellsFull[lastCell-1]){
       return lastCell - 1;
   }
   else {
-    println("No such cell exists");
     return -1;
   }
 }
@@ -505,7 +501,6 @@ int getBottomCell(int lastCell){
   if (lastCell > 2 && lastCell < 6 && !cellsFull[lastCell+3]){
     return lastCell + 3;
   } else {
-    println("There is no cell below those in the bottom row");
     return -1;
   }
 }
@@ -513,7 +508,6 @@ int getAboveCell(int lastCell){
   if (lastCell > 2 && !cellsFull[lastCell-3]){
     return lastCell - 3;
   } else {
-    println("There is no cell above those in the top row");
     return -1;
   }
 }
