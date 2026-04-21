@@ -9,7 +9,7 @@ void setup() {
 
 void draw() {
   makeBoard();
-  if (!userMoveNeeded) {
+  if (!userMoveNeeded && !checkWin()) {
       pcTurn();
   }
   checkGameOver();

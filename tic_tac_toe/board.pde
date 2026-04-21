@@ -16,10 +16,6 @@ boolean checkGameOver(){
 
   for (int i = 0; i < cellsFull.length; i++){
     allCellsFull &= cellsFull[i];
-
-    if (!cellsFull[i]){
-      println(cellsFull);
-    }
   }
 
   if (checkWin()) {
@@ -107,7 +103,6 @@ void drawCircle(int cell){
 void userTurn(){
   if (userCell != -1) {
     drawCircle(userCell);
-    println("THE CELL", userCell, "IS NOW FULL");
   }
   if (checkGameOver()){
     println("The Game Is Over");
@@ -180,12 +175,15 @@ boolean checkWin(){
 
   if (playerWin) {
     println("You Have Won The Game");
+    noLoop();
   }
   if (pcWin){
     println("The Computer Has Won The Game");
+    noLoop();
   }
   if (!pcWin && !playerWin && gameOver && turn != 1){
     println("The Game Is A Tie");
+    noLoop();
   }
   return isWin;
 }
@@ -210,7 +208,6 @@ void pcTurn(){
   }
   cellsFull[pcCell] = true;
   pcCells[pcCell] = true;
-  println("THE CELL", pcCell, "IS NOW FULL");
   drawX(pcCell);
 
   turn++;
