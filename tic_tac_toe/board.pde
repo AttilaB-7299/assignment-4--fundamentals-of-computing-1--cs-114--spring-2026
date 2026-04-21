@@ -276,41 +276,30 @@ int nextVerticalMove(){
 }
 boolean checkVerticalWin(){
   if (pcCells[0] && pcCells[3]){
-    pcCell = 6;
     return true;
   }
   if (pcCells[0] && pcCells[6]){
-    pcCell = 3;
     return true;
   }
   if (pcCells[6] && pcCells[3]){
-    pcCell = 0;
     return true;
   }
-
   if (pcCells[1] && pcCells[7]){
-    pcCell = 4;
     return true;
   }
   if (pcCells[4] && pcCells[7]){
-    pcCell = 1;
     return true;
   }
   if (pcCells[1] && pcCells[4]){
-    pcCell = 7;
     return true;
   }
-
   if (pcCells[2] && pcCells[8]){
-    pcCell = 5;
     return true;
   }
   if (pcCells[5] && pcCells[8]){
-    pcCell = 2;
     return true;
   }
   if (pcCells[2] && pcCells[5]){
-    pcCell = 8;
     return true;
   }
   else {
@@ -319,31 +308,24 @@ boolean checkVerticalWin(){
 }
 int nextHorizontalMove(){
   if (pcCells[0] && pcCells[2]){
-    pcCell = 1;
     return 1;
   }
   if (pcCells[0] && pcCells[1]){
-    pcCell = 2;
     return 2;
   }
   if (pcCells[2] && pcCells[1]){
-    pcCell = 0;
     return 0;
   }
   if (pcCells[3] && pcCells[5]){
-    pcCell = 4;
     return 4;
   }
   if (pcCells[3] && pcCells[4]){
-    pcCell = 5;
     return 5;
   }
   if (pcCells[4] && pcCells[5]){
-    pcCell = 3;
     return 3;
   }
   if (pcCells[6] && pcCells[8]){
-    pcCell = 7;
     return 7;
   }
   if (pcCells[6] && pcCells[7]){
@@ -351,7 +333,6 @@ int nextHorizontalMove(){
     return 8;
   }
   if (pcCells[7] && pcCells[8]){
-    pcCell = 6;
     return 6;
   }
   else {
@@ -360,39 +341,30 @@ int nextHorizontalMove(){
 }
 boolean checkHorizontalWin(){
   if (pcCells[0] && pcCells[2]){
-    pcCell = 1;
     return true;
   }
   if (pcCells[0] && pcCells[1]){
-    pcCell = 2;
     return true;
   }
   if (pcCells[2] && pcCells[1]){
-    pcCell = 0;
     return true;
   }
   if (pcCells[3] && pcCells[5]){
-    pcCell = 4;
     return true;
   }
   if (pcCells[3] && pcCells[4]){
-    pcCell = 5;
     return true;
   }
   if (pcCells[4] && pcCells[5]){
-    pcCell = 3;
     return true;
   }
   if (pcCells[6] && pcCells[8]){
-    pcCell = 7;
     return true;
   }
   if (pcCells[6] && pcCells[7]){
-    pcCell = 8;
     return true;
   }
   if (pcCells[7] && pcCells[8]){
-    pcCell = 6;
     return true;
   }
   else {
@@ -435,23 +407,18 @@ int getNextFreeSpace(int lastCell){
 }
 int nextDiagonalMove(){
   if (pcCells[2] && pcCells[6] || pcCells[8] && pcCells[0]){
-    pcCell = 4;
     return 4;
   }
   if (pcCells[2] && pcCells[4]){
-    pcCell = 6;
     return 6;
   }
   if (pcCells[6] && pcCells[4]){
-    pcCell = 2;
     return 2;
   }
   if (pcCells[4] && pcCells[8]){
-    pcCell = 0;
     return 0;
   }
   if (pcCells[0] && pcCells[4]){
-    pcCell = 8;
     return 8;
   } else {
     return 18;
@@ -459,23 +426,18 @@ int nextDiagonalMove(){
 }
 boolean checkDiagonalWin(){
   if (pcCells[2] && pcCells[6] || pcCells[8] && pcCells[0]){
-    pcCell = 4;
     return true;
   }
   if (pcCells[2] && pcCells[4]){
-    pcCell = 6;
     return true;
   }
   if (pcCells[6] && pcCells[4]){
-    pcCell = 2;
     return true;
   }
   if (pcCells[4] && pcCells[8]){
-    pcCell = 0;
     return true;
   }
   if (pcCells[0] && pcCells[4]){
-    pcCell = 8;
     return true;
   } else {
     return false;
