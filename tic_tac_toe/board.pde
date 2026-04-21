@@ -1,6 +1,7 @@
 int userCell = -1;
 int turn = 1;
 int pcCell = -1;
+int lastCell = -1;
 
 boolean userMoveNeeded = false;
 boolean pcWin = false;
@@ -197,19 +198,322 @@ void pcTurn(){
   if(!checkGameOver()){
     println("The Game Is Still Going");
   }
-  pcCell = (int)random(9);
   if (turn == 1) {
-    println(pcCell);
-  } else{
     pcCell = (int)random(9);
-    while (cellsFull[pcCell]){
-      pcCell = (int)random(9);
-    }
+    println(pcCell);
+  } else {
+    pcCell = getNextMove();
+  }
+  while (cellsFull[pcCell]){
+    pcCell = (int)random(9);
   }
   cellsFull[pcCell] = true;
   pcCells[pcCell] = true;
+  lastCell = pcCell;
   drawX(pcCell);
 
   turn++;
   userMoveNeeded = true;
+}
+int getNextMove(){
+  checkDiagonalWin();
+  checkHorizontalWin();
+  checkVerticalWin();
+  if (!cellsFull[pcCell]){
+    if (checkDiagonalWin()){
+    return nextDiagonalMove();
+    } else if (checkHorizontalWin()){
+      return nextHorizontalMove();
+    } else if (checkVerticalWin()){
+      return nextVerticalMove();
+    } else {
+      return (int)random(9);
+    }
+  } else{
+    return getNextFreeSpace(lastCell);
+  }
+}
+int nextVerticalMove(){
+  if (pcCells[0] && pcCells[3]){
+    pcCell = 6;
+    return 6;
+  }
+  if (pcCells[0] && pcCells[6]){
+    pcCell = 3;
+    return 3;
+  }
+  if (pcCells[6] && pcCells[3]){
+    pcCell = 0;
+    return 0;
+  }
+
+  if (pcCells[1] && pcCells[7]){
+    pcCell = 4;
+    return 4;
+  }
+  if (pcCells[4] && pcCells[7]){
+    pcCell = 1;
+    return 1;
+  }
+  if (pcCells[1] && pcCells[4]){
+    pcCell = 7;
+    return 7;
+  }
+
+  if (pcCells[2] && pcCells[8]){
+    pcCell = 5;
+    return 5;
+  }
+  if (pcCells[5] && pcCells[8]){
+    pcCell = 2;
+    return 2;
+  }
+  if (pcCells[2] && pcCells[5]){
+    pcCell = 8;
+    return 8;
+  }
+  else {
+    return 18;
+  }
+}
+boolean checkVerticalWin(){
+  if (pcCells[0] && pcCells[3]){
+    pcCell = 6;
+    return true;
+  }
+  if (pcCells[0] && pcCells[6]){
+    pcCell = 3;
+    return true;
+  }
+  if (pcCells[6] && pcCells[3]){
+    pcCell = 0;
+    return true;
+  }
+
+  if (pcCells[1] && pcCells[7]){
+    pcCell = 4;
+    return true;
+  }
+  if (pcCells[4] && pcCells[7]){
+    pcCell = 1;
+    return true;
+  }
+  if (pcCells[1] && pcCells[4]){
+    pcCell = 7;
+    return true;
+  }
+
+  if (pcCells[2] && pcCells[8]){
+    pcCell = 5;
+    return true;
+  }
+  if (pcCells[5] && pcCells[8]){
+    pcCell = 2;
+    return true;
+  }
+  if (pcCells[2] && pcCells[5]){
+    pcCell = 8;
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+int nextHorizontalMove(){
+  if (pcCells[0] && pcCells[2]){
+    pcCell = 1;
+    return 1;
+  }
+  if (pcCells[0] && pcCells[1]){
+    pcCell = 2;
+    return 2;
+  }
+  if (pcCells[2] && pcCells[1]){
+    pcCell = 0;
+    return 0;
+  }
+  if (pcCells[3] && pcCells[5]){
+    pcCell = 4;
+    return 4;
+  }
+  if (pcCells[3] && pcCells[4]){
+    pcCell = 5;
+    return 5;
+  }
+  if (pcCells[4] && pcCells[5]){
+    pcCell = 3;
+    return 3;
+  }
+  if (pcCells[6] && pcCells[8]){
+    pcCell = 7;
+    return 7;
+  }
+  if (pcCells[6] && pcCells[7]){
+    pcCell = 8;
+    return 8;
+  }
+  if (pcCells[7] && pcCells[8]){
+    pcCell = 6;
+    return 6;
+  }
+  else {
+    return 18;
+  }
+}
+boolean checkHorizontalWin(){
+  if (pcCells[0] && pcCells[2]){
+    pcCell = 1;
+    return true;
+  }
+  if (pcCells[0] && pcCells[1]){
+    pcCell = 2;
+    return true;
+  }
+  if (pcCells[2] && pcCells[1]){
+    pcCell = 0;
+    return true;
+  }
+  if (pcCells[3] && pcCells[5]){
+    pcCell = 4;
+    return true;
+  }
+  if (pcCells[3] && pcCells[4]){
+    pcCell = 5;
+    return true;
+  }
+  if (pcCells[4] && pcCells[5]){
+    pcCell = 3;
+    return true;
+  }
+  if (pcCells[6] && pcCells[8]){
+    pcCell = 7;
+    return true;
+  }
+  if (pcCells[6] && pcCells[7]){
+    pcCell = 8;
+    return true;
+  }
+  if (pcCells[7] && pcCells[8]){
+    pcCell = 6;
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+int getNextFreeSpace(int lastCell){
+  if (getRightCell(lastCell) != -1){
+    if (!cellsFull[getRightCell(lastCell)]){
+      return getRightCell(lastCell);
+    } else {
+      return -18;
+    }
+  } else if (getLeftCell(lastCell) != -1){
+    if (!cellsFull[getLeftCell(lastCell)]){
+      return getLeftCell(lastCell);
+    } else {
+      return -18;
+    }
+  } else if (getBottomCell(lastCell) != -1){
+    if (!cellsFull[getBottomCell(lastCell)]){
+      return getBottomCell(lastCell);
+    } else {
+      return -18;
+    }
+  }  else if (getAboveCell(lastCell) != -1){
+    if (!cellsFull[getAboveCell(lastCell)]){
+      return getAboveCell(lastCell);
+    } else {
+      return -18;
+    }
+  }
+  else {
+    pcCell = (int)random(9);
+    while (cellsFull[pcCell]){
+      pcCell = (int)random(9);
+    }
+    return pcCell;
+  }
+}
+int nextDiagonalMove(){
+  if (pcCells[2] && pcCells[6] || pcCells[8] && pcCells[0]){
+    pcCell = 4;
+    return 4;
+  }
+  if (pcCells[2] && pcCells[4]){
+    pcCell = 6;
+    return 6;
+  }
+  if (pcCells[6] && pcCells[4]){
+    pcCell = 2;
+    return 2;
+  }
+  if (pcCells[4] && pcCells[8]){
+    pcCell = 0;
+    return 0;
+  }
+  if (pcCells[0] && pcCells[4]){
+    pcCell = 8;
+    return 8;
+  } else {
+    return 18;
+  }
+}
+boolean checkDiagonalWin(){
+  if (pcCells[2] && pcCells[6] || pcCells[8] && pcCells[0]){
+    pcCell = 4;
+    return true;
+  }
+  if (pcCells[2] && pcCells[4]){
+    pcCell = 6;
+    return true;
+  }
+  if (pcCells[6] && pcCells[4]){
+    pcCell = 2;
+    return true;
+  }
+  if (pcCells[4] && pcCells[8]){
+    pcCell = 0;
+    return true;
+  }
+  if (pcCells[0] && pcCells[4]){
+    pcCell = 8;
+    return true;
+  } else {
+    return false;
+  }
+}
+int getRightCell(int lastCell){
+  if (lastCell != 2 && lastCell != 5 && lastCell != 8 && !cellsFull[lastCell+1]){
+      return lastCell + 1;
+  }
+  else {
+    println("No such cell exists");
+    return -1;
+  }
+}
+int getLeftCell(int lastCell){
+if (lastCell != 0 && lastCell != 3 && lastCell != 6 && !cellsFull[lastCell-1]){
+      return lastCell - 1;
+  }
+  else {
+    println("No such cell exists");
+    return -1;
+  }
+}
+int getBottomCell(int lastCell){
+  if (lastCell > 2 && lastCell < 6 && !cellsFull[lastCell+3]){
+    return lastCell + 3;
+  } else {
+    println("There is no cell below those in the bottom row");
+    return -1;
+  }
+}
+int getAboveCell(int lastCell){
+  if (lastCell > 2 && !cellsFull[lastCell-3]){
+    return lastCell - 3;
+  } else {
+    println("There is no cell above those in the top row");
+    return -1;
+  }
 }
