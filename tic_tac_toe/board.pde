@@ -77,34 +77,6 @@ float getCellY(int cell){
       return 0;
   }
 }
-// void drawCircle(int cell){
-//   if (!checkGameOver()){
-//     if (cell >= 0 && cell <= 8){
-//     noFill();
-//       if (!cellsFull[cell]){
-
-//         float x = getCellX(cell);
-//         float y = getCellY(cell);
-
-//         x += CIRCLE_RADIUS;
-//         y += CIRCLE_RADIUS;
-
-//         circle(x, y, CIRCLE_DIAMETER);
-
-//         cellsFull[cell] = true;
-//         playerCells[cell] = true;
-//         userMoveNeeded = false;
-//         turn++;
-//       } else{
-//         println("That cell is full try another");
-//         userMoveNeeded = true;
-//       }
-//     } else {
-//       println("Please enter a number 0-8");
-//     }
-//   }
-// }
-
 void userTurn(){
   if (userCell != -1) {
     drawCircle(userCell);
