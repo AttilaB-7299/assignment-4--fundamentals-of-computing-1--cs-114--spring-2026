@@ -10,12 +10,12 @@ boolean gameOver = true;
 boolean[] cellsFull = new boolean[9];
 boolean [] pcCells = new boolean[9];
 boolean [] playerCells = new boolean[9];
-// boolean checkCellFull(int cell){
-//   if (cell < 0 || cell > 8){
-//     return true;
-//   }
-//   return cellsFull[cell];
-// }
+boolean checkCellFull(int cell){
+  if (cell < 0 || cell > 8){
+    return true;
+  }
+  return cellsFull[cell];
+}
 boolean checkGameOver(){
   boolean allCellsFull = true;
 
