@@ -1,6 +1,5 @@
 int userCell = -1;
 int turn = 1;
-int pcCell = -1;
 int lastCell = -1;
 
 boolean userMoveNeeded = false;
@@ -11,7 +10,12 @@ boolean gameOver = true;
 boolean[] cellsFull = new boolean[9];
 boolean [] pcCells = new boolean[9];
 boolean [] playerCells = new boolean[9];
-
+// boolean checkCellFull(int cell){
+//   if (cell < 0 || cell > 8){
+//     return true;
+//   }
+//   return cellsFull[cell];
+// }
 boolean checkGameOver(){
   boolean allCellsFull = true;
 
@@ -190,40 +194,41 @@ boolean checkTie(){
   return !playerWin && !pcWin && checkGameOver();
 }
 void pcTurn(){
+  int cornerCell = (int)random(4);
+  int pcCell = cornerCell;
   checkTie();
   checkWin();
   if(!checkGameOver()){
     println("The Game Is Still Going");
   }
   if (turn == 1) {
-    int cornerCell = (int)random(4);
     switch (cornerCell) {
       case 1:
         pcCell = 0;
+        break;
       case 2:
         pcCell = 2;
+        break;
       case 3:
         pcCell = 6;
+        break;
       case 4:
         pcCell = 8;
+        break;
     }
   } else {
     pcCell = getNextMove();
   }
 
+  drawX(pcCell);
   cellsFull[pcCell] = true;
   pcCells[pcCell] = true;
   lastCell = pcCell;
-  drawX(pcCell);
 
   turn++;
   userMoveNeeded = true;
 }
 int getNextMove(){
-  checkDiagonalWinCon();
-  checkHorizontalWinCon();
-  checkVerticalWinCon();
-  if (!cellsFull[pcCell]){
     if (checkDiagonalWinCon()){
     return playDiagonalWin();
     }
@@ -233,50 +238,38 @@ int getNextMove(){
     else if (checkVerticalWinCon()){
       return playVerticalWin();
     }
-    else {
-      return (int)random(9);
-    }
-  } else {
+   else {
     return getNextFreeSpace(lastCell);
   }
 }
 int playVerticalWin(){
   if (pcCells[0] && pcCells[3]){
-    pcCell = 6;
     return 6;
   }
   if (pcCells[0] && pcCells[6]){
-    pcCell = 3;
     return 3;
   }
   if (pcCells[6] && pcCells[3]){
-    pcCell = 0;
     return 0;
   }
 
   if (pcCells[1] && pcCells[7]){
-    pcCell = 4;
     return 4;
   }
   if (pcCells[4] && pcCells[7]){
-    pcCell = 1;
     return 1;
   }
   if (pcCells[1] && pcCells[4]){
-    pcCell = 7;
     return 7;
   }
 
   if (pcCells[2] && pcCells[8]){
-    pcCell = 5;
     return 5;
   }
   if (pcCells[5] && pcCells[8]){
-    pcCell = 2;
     return 2;
   }
   if (pcCells[2] && pcCells[5]){
-    pcCell = 8;
     return 8;
   }
   else {
@@ -284,73 +277,74 @@ int playVerticalWin(){
   }
 }
 boolean checkVerticalWinCon(){
+  int nextPcCell;
   if (pcCells[0] && pcCells[3]){
-    pcCell = 6;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 6;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[0] && pcCells[6]){
-    pcCell = 3;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 3;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[6] && pcCells[3]){
-    pcCell = 0;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 0;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[1] && pcCells[7]){
-    pcCell = 4;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 4;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[4] && pcCells[7]){
-    pcCell = 1;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 1;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[1] && pcCells[4]){
-    pcCell = 7;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 7;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[2] && pcCells[8]){
-    pcCell = 5;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 5;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[5] && pcCells[8]){
-    pcCell = 2;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 2;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[2] && pcCells[5]){
-    pcCell = 8;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 8;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
@@ -383,7 +377,6 @@ int playHorizontalWin(){
     return 7;
   }
   if (pcCells[6] && pcCells[7]){
-    pcCell = 8;
     return 8;
   }
   if (pcCells[7] && pcCells[8]){
@@ -394,73 +387,74 @@ int playHorizontalWin(){
   }
 }
 boolean checkHorizontalWinCon(){
+  int nextPcCell;
   if (pcCells[0] && pcCells[2]){
-    pcCell = 1;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 1;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[0] && pcCells[1]){
-    pcCell = 2;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 2;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[2] && pcCells[1]){
-    pcCell = 0;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 0;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[3] && pcCells[5]){
-    pcCell = 4;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 4;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[3] && pcCells[4]){
-    pcCell = 5;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 5;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[4] && pcCells[5]){
-    pcCell = 3;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 3;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[6] && pcCells[8]){
-    pcCell = 7;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 7;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[6] && pcCells[7]){
-    pcCell = 8;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 8;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[7] && pcCells[8]){
-    pcCell = 6;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 6;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
@@ -468,40 +462,6 @@ boolean checkHorizontalWinCon(){
   }
   else {
     return false;
-  }
-}
-int getNextFreeSpace(int lastCell){
-  if (getRightCell(lastCell) != -1){
-    if (!cellsFull[getRightCell(lastCell)]){
-      return getRightCell(lastCell);
-    } else {
-      return -18;
-    }
-  } else if (getLeftCell(lastCell) != -1){
-    if (!cellsFull[getLeftCell(lastCell)]){
-      return getLeftCell(lastCell);
-    } else {
-      return -18;
-    }
-  } else if (getBelowCell(lastCell) != -1){
-    if (!cellsFull[getBelowCell(lastCell)]){
-      return getBelowCell(lastCell);
-    } else {
-      return -18;
-    }
-  }  else if (getAboveCell(lastCell) != -1){
-    if (!cellsFull[getAboveCell(lastCell)]){
-      return getAboveCell(lastCell);
-    } else {
-      return -18;
-    }
-  }
-  else {
-    pcCell = (int)random(9);
-    while (cellsFull[pcCell]){
-      pcCell = (int)random(9);
-    }
-    return pcCell;
   }
 }
 int playDiagonalWin(){
@@ -524,41 +484,42 @@ int playDiagonalWin(){
   }
 }
 boolean checkDiagonalWinCon(){
+  int nextPcCell;
   if (pcCells[2] && pcCells[6] || pcCells[8] && pcCells[0]){
-    pcCell = 4;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 4;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[2] && pcCells[4]){
-    pcCell = 6;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 6;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[6] && pcCells[4]){
-    pcCell = 2;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 2;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[4] && pcCells[8]){
-    pcCell = 0;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 0;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
     }
   }
   if (pcCells[0] && pcCells[4]){
-    pcCell = 8;
-    if (!cellsFull[pcCell]){
+    nextPcCell = 8;
+    if (!cellsFull[nextPcCell]){
       return true;
     } else {
       return false;
@@ -567,6 +528,28 @@ boolean checkDiagonalWinCon(){
     return false;
   }
 }
+int getNextFreeSpace(int lastCell){
+  int pcCell;
+  if (getRightCell(lastCell) != -1){
+      return getRightCell(lastCell);
+
+  } else if (getLeftCell(lastCell) != -1){
+      return getLeftCell(lastCell);
+
+  } else if (getBelowCell(lastCell) != -1){
+      return getBelowCell(lastCell);
+
+  } else if (getAboveCell(lastCell) != -1){
+      return getAboveCell(lastCell);
+  } else {
+    pcCell = (int)random(9);
+    while (cellsFull[pcCell]){
+      pcCell = (int)random(9);
+    }
+    return pcCell;
+  }
+}
+
 int getRightCell(int lastCell){
   if (lastCell != 2 && lastCell != 5 && lastCell != 8 && !cellsFull[lastCell+1]){
       return lastCell + 1;
