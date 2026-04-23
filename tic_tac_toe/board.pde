@@ -5,13 +5,13 @@ boolean isTurnOne = true;
 boolean userMoveNeeded = false;
 boolean pcWin = false;
 boolean playerWin = false;
-boolean gameOver = true;
+boolean gameOver = false;
 
 boolean[] cellsFull = new boolean[9];
 boolean [] pcCells = new boolean[9];
 boolean [] playerCells = new boolean[9];
 
-boolean checkGameOver(){
+void checkGameOver(){
 	boolean allCellsFull = true;
 
 	for (int i = 0; i < cellsFull.length; i++){
@@ -19,11 +19,9 @@ boolean checkGameOver(){
 	}
 
 	if (checkWin()) {
-		return true;
+		gameOver = true;
 	}
 	gameOver = allCellsFull;
-
-	return gameOver;
 }
 void keyPressed(){
 	userCell = key - '0';
@@ -76,7 +74,7 @@ void userTurn(){
 	if (userCell != -1) {
 		drawCircle(userCell);
 	}
-	if (checkGameOver()){
+	if (gameOver){
 		println("The Game Is Over");
 	}
 }
@@ -158,7 +156,7 @@ boolean checkWin(){
 	return isWin;
 }
 boolean checkTie(){
-	return !playerWin && !pcWin && checkGameOver();
+	return !playerWin && !pcWin && gameOver;
 }
 void pcTurn(){
 	int cornerCell = (int)random(4);

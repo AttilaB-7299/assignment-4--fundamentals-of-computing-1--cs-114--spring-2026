@@ -18,7 +18,7 @@ void drawX(int cell){
 	line(x + LINE_HEIGHT_NORMAL, y, x, y + LINE_HEIGHT_NORMAL);
 }
 void drawCircle(int cell){
-	if (!checkGameOver()){
+	if (!gameOver){
 		if (cell >= 0 && cell <= 8){
 		noFill();
 			if (!cellsFull[cell]){
