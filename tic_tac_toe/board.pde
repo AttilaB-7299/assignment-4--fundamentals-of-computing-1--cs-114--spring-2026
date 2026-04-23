@@ -21,9 +21,9 @@ void checkGameOver(){
 	if (allCellsFull || checkWin()) {
 		gameOver = true;
 	}
-  if (gameOver){
-    println("The Game Is Over");
-  }
+	if (gameOver){
+		println("The Game Is Over");
+	}
 }
 void keyPressed(){
 	userCell = key - '0';
