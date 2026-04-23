@@ -180,6 +180,7 @@ void pcTurn(){
 				pcCell = 8;
 				break;
 		}
+    isTurnOne = false;
 	} else {
 		pcCell = getNextMove();
 	}
