@@ -152,7 +152,7 @@ boolean checkWin(){
 		noLoop();
 	}
 	if (!pcWin && !playerWin && gameOver && !isTurnOne){
-		println("The Game Is A Tie");
+		println("Nobody Has Won The Game");
 		noLoop();
 	}
 	return isWin;
