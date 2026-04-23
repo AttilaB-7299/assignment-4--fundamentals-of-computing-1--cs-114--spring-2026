@@ -18,13 +18,13 @@ void checkGameOver(){
 		allCellsFull &= cellsFull[i];
 	}
 
-  if (allCellsFull || checkWin()) {
-    gameOver = true;
-  }
+	if (allCellsFull || checkWin()) {
+		gameOver = true;
+	}
 }
 void keyPressed(){
 	userCell = key - '0';
-  checkGameOver();
+	checkGameOver();
 	userTurn();
 }
 float getCellX(int cell){
@@ -71,13 +71,13 @@ float getCellY(int cell){
 	}
 }
 void userTurn(){
-  if (!gameOver){
-    if (userCell != -1) {
-		  drawCircle(userCell);
-	  }
-  } else {
-    println("The Game Is Over");
-  }
+	if (!gameOver){
+		if (userCell != -1) {
+			drawCircle(userCell);
+		}
+	} else {
+		println("The Game Is Over");
+	}
 }
 boolean checkColumn(){
 	boolean isWin = false;
@@ -179,7 +179,7 @@ void pcTurn(){
 				pcCell = 8;
 				break;
 		}
-    isTurnOne = false;
+		isTurnOne = false;
 	} else {
 		pcCell = getNextMove();
 	}

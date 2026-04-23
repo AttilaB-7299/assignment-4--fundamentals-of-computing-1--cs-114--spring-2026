@@ -9,8 +9,8 @@ void setup() {
 
 void draw() {
 	makeBoard();
-	if (!userMoveNeeded && !checkWin()) {
+	checkGameOver();
+	if (!userMoveNeeded && !gameOver) {
 			pcTurn();
 	}
-	checkGameOver();
 }
