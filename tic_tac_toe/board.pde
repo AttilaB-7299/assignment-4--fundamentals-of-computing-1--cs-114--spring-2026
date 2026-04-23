@@ -71,12 +71,13 @@ float getCellY(int cell){
 	}
 }
 void userTurn(){
-	if (userCell != -1) {
-		drawCircle(userCell);
-	}
-	if (gameOver){
-		println("The Game Is Over");
-	}
+  if (!gameOver){
+    if (userCell != -1) {
+		  drawCircle(userCell);
+	  }
+  } else {
+    println("The Game Is Over");
+  }
 }
 boolean checkColumn(){
 	boolean isWin = false;
