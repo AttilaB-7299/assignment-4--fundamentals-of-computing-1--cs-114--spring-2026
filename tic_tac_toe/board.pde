@@ -1,7 +1,7 @@
 int userCell = -1;
-int turn = 1;
 int lastCell = -1;
 
+boolean isTurnOne = true;
 boolean userMoveNeeded = false;
 boolean pcWin = false;
 boolean playerWin = false;
@@ -151,7 +151,7 @@ boolean checkWin(){
 		println("The Computer Has Won The Game");
 		noLoop();
 	}
-	if (!pcWin && !playerWin && gameOver && turn != 1){
+	if (!pcWin && !playerWin && gameOver && !isTurnOne){
 		println("The Game Is A Tie");
 		noLoop();
 	}
@@ -165,7 +165,7 @@ void pcTurn(){
 	int pcCell = cornerCell;
 	checkTie();
 	checkWin();
-	if (turn == 1) {
+	if (isTurnOne) {
 		switch (cornerCell) {
 			case 1:
 				pcCell = 0;
@@ -188,8 +188,6 @@ void pcTurn(){
 	cellsFull[pcCell] = true;
 	pcCells[pcCell] = true;
 	lastCell = pcCell;
-
-	turn++;
 	userMoveNeeded = true;
 }
 int getNextMove(){
