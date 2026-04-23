@@ -21,6 +21,9 @@ void checkGameOver(){
 	if (allCellsFull || checkWin()) {
 		gameOver = true;
 	}
+  if (gameOver){
+    println("The Game Is Over");
+  }
 }
 void keyPressed(){
 	userCell = key - '0';
@@ -75,8 +78,6 @@ void userTurn(){
 		if (userCell != -1) {
 			drawCircle(userCell);
 		}
-	} else {
-		println("The Game Is Over");
 	}
 }
 boolean checkColumn(){
@@ -142,7 +143,7 @@ boolean checkWin(){
 	isWin |= checkRow();
 	isWin |= checkDiagonal();
 
-	if (playerWin) {
+	if (playerWin && !gameOver) {
 		println("You Have Won The Game");
 		noLoop();
 	}
