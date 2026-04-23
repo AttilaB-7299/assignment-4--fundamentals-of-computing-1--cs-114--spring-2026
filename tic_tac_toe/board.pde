@@ -18,13 +18,13 @@ void checkGameOver(){
 		allCellsFull &= cellsFull[i];
 	}
 
-	if (checkWin()) {
-		gameOver = true;
-	}
-	gameOver = allCellsFull;
+  if (allCellsFull || checkWin()) {
+    gameOver = true;
+  }
 }
 void keyPressed(){
 	userCell = key - '0';
+  checkGameOver();
 	userTurn();
 }
 float getCellX(int cell){
