@@ -147,7 +147,7 @@ boolean checkWin(){
 		println("You Have Won The Game");
 		noLoop();
 	}
-	if (pcWin){
+	if (pcWin && !gameOver){
 		println("The Computer Has Won The Game");
 		noLoop();
 	}
