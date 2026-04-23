@@ -35,6 +35,7 @@ void drawCircle(int cell){
 				playerCells[cell] = true;
 				userMoveNeeded = false;
 				turn++;
+        println("The Game Is Still In Play");
 			} else{
 				println("That cell is full try another");
 				userMoveNeeded = true;

@@ -165,9 +165,6 @@ void pcTurn(){
 	int pcCell = cornerCell;
 	checkTie();
 	checkWin();
-	if(!checkGameOver()){
-		println("The Game Is Still Going");
-	}
 	if (turn == 1) {
 		switch (cornerCell) {
 			case 1:
